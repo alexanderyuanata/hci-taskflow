@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New Task</title>
+    <!-- Bootstrap CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+    <!-- Fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-start">
+          <a href="home.html">
+            <h4><strong>Task<span style="color:rgb(42, 207, 219)">Flow</span></strong></h4>
+          </a>
+        </div>
+        <div class="ms-auto">
+          <button class="btn btn-outline-danger" onclick="logout()">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Task Info -->
+    <div class="container-fluid d-flex justify-content-center" id="task-container">
+      <div class="card" id="task-card">
+        <div class="card-header d-flex justify-content-between">
+          <input type="text" class="form-control" id="input-title" maxlength="100" placeholder="Task Title" required>
+        </div>
+        <div class="card-body">
+          <textarea class="form-control align-top" id="input-desc" rows="8" maxlength="800" placeholder="Describe the Task" required></textarea>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <input type="text" class="form-control" id="input-tags" maxlength="60" placeholder="Write Tags Separated by Commas (,)">
+          <input type="datetime-local" class="form-control" id="input-due" required>
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-block" id="save-task-btn" onclick="addTask()">
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="messageModal"
+      tabindex="-1"
+      aria-labelledby="messageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalMessage">
+            Lorem ipsum
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="./scripts/script.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

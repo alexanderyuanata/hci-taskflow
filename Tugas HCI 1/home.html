@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task List</title>
+    <!-- Bootstrap CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+    <!-- Fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-start">
+          <a href="home.html">
+            <h4><strong>Task<span style="color:rgb(42, 207, 219)">Flow</span></strong></h4>
+          </a>
+        </div>
+        <div class="ms-auto">
+          <button class="btn btn-outline-danger" onclick="logout()">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main List -->
+    <div class="container-fluid align-items-center">
+      <div class="row mt-5 mb-5" id="cardRow"></div>
+    </div>
+
+    <a href="./newTask.html">
+      <div
+        class="floating-button position-fixed bottom-0 end-0"
+        style="margin: 25px"
+      >
+        <button
+          type="button"
+          class="btn btn-primary btn-circle"
+          id="new-task-btn"
+        >
+          <i class="fas fa-pencil-alt"><br /><br />Add Task</i>
+        </button>
+      </div>
+    </a>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="messageModal"
+      tabindex="-1"
+      aria-labelledby="messageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalMessage">
+            Your message goes here.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Task -->
+    <div
+      class="modal fade"
+      id="confirmDelete"
+      tabindex="-1"
+      aria-labelledby="messageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">Task Deletion</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalMessage">
+            You are about to delete a task. This is
+            <strong>permanent and cannot be undone.</strong><br />Press
+            <b>Confirm</b> to continue.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="home-task-delete-btn"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="./scripts/script.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

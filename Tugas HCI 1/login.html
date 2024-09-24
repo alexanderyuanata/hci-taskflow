@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <!-- Bootstrap CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+    <!-- Fontawesome -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body id="auth-page">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <h1 id="taskflow-title">Task<span style="color:rgb(42, 207, 219)">Flow</span></h1>
+      </div>
+      <div class="row justify-content-center">
+        <br>
+        <em style="text-align: center;">Get things done instead of trying to remember.</em>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-5 p-5" id="login-panel">
+          <a href="./index.html" class="btn btn-link mb-3" style="font-weight: bold; color: #007bff;">
+            <i class="fa-solid fa-caret-left"></i> Go Back
+          </a>
+
+          <p style="text-align: center;">
+            Sign into a preexisting account in <strong>Task<span style="color:rgb(42, 207, 219)">Flow</span></strong>.
+            Fill in the form with the account's username and password.
+          </p>
+          <form id="auth-form">
+            <div class="form-group mb-3">
+              <label for="username"><b>Username</b></label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+                autocomplete="username"
+                placeholder="Enter your username"
+              />
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="password"><b>Password</b></label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter the correct password"
+              />
+            </div>
+            <button
+            type="button"
+            class="btn btn-primary btn-block fw-bold w-100"
+            id="log-in"
+            onclick="handleLogin()"
+          >
+            Sign In
+          </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="messageModal"
+      tabindex="-1"
+      aria-labelledby="messageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalMessage">
+            Your message goes here.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="./scripts/script.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

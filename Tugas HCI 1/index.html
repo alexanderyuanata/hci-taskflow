@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+  <body id="auth-page">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <h1 id="taskflow-title">Task<span style="color:rgb(42, 207, 219)">Flow</span></h1>
+      </div>
+      <div class="row justify-content-center">
+        <br>
+        <em style="text-align: center;">Get things done instead of trying to remember.</em>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-5 p-5" id="login-panel">
+          <h3 class="text-center mb-4">Welcome!</h3>
+          <p style="text-align: center;">
+            <strong>Task<span style="color:rgb(42, 207, 219)">Flow</span></strong>
+            is a web application that helps the user track their tasks. These tasks
+            are stored in the cloud and always accessible with the right credentials.
+          </p>
+          <p style="text-align: center;">To continue, please <u>choose one of the options</u> below:</p>
+          <br>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" onclick="window.location.href='./sign-up.html'">Create a new Account</button>
+            <button class="btn btn-secondary" onclick="window.location.href='./login.html'">Sign Into an Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+              <form id="auth-form">
+            <div class="form-group mb-3">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+
+            <div class="row gx-2 d-flex align-items-center">
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block fw-bold w-100"
+                  id="sign-up"
+                  onclick="handleSignUp(event)"
+                >
+                  Sign Up
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-block fw-bold w-100"
+                  id="login"
+                  onclick="handleLogin()"
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </form>
+    
+    -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="messageModal"
+      tabindex="-1"
+      aria-labelledby="messageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalMessage">
+            Your message goes here.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="./scripts/script.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

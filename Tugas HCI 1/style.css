@@ -1,0 +1,75 @@
+#login-panel {
+  margin: 10%;
+  box-shadow: 8px 8px 22px rgba(0, 0, 0, 0.062);
+  border-radius: 10px;
+}
+
+.taskCard:hover {
+  transition: 0.25s ease-in-out;
+  scale: 1.005 1.01;
+  cursor: pointer;
+  color: black;
+}
+
+.taskCard {
+  transition: 0.25s ease-in-out;
+  scale: 1.0;
+}
+
+a {
+  font-style: none;
+  color: black;
+  text-decoration: none;
+}
+
+#task-container {
+  min-height: 80vh;
+  padding: 5% 2.5%;
+}
+
+#task-card {
+  width: 80%;
+}
+
+#input-desc {
+  width: 100%;
+  height: 100%;
+}
+
+#save-task-btn {
+
+}
+
+.due-task {
+  border-color: rgb(255, 21, 95);
+}
+
+.due-task .card-title {
+  color: rgb(255, 21, 95);
+}
+
+.due-task #due-time {
+  font-weight: 500;
+  color: rgb(255, 21, 95);
+}
+
+#new-task-btn {
+  padding: 18px;
+  box-shadow: 5px 5px 12px rgba(107, 188, 255, 0.553);
+}
+
+#taskflow-title {
+  text-align: center;
+  font-weight: 900;
+}
+
+#auth-page {
+
+}
+
+#no-task-notif {
+  text-align: center;
+  padding-top: 2%;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.493);
+}
