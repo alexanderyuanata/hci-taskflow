@@ -190,7 +190,28 @@ async function getTasks() {
 
         cardRow.appendChild(notification);
       } else {
+        let lastDay = undefined;
+        let today = undefined;
+
         tasksToDisplay.forEach((task) => {
+          today = task.due_time.substring(0,10);
+          
+          //if the current date is different
+          if (lastDay != today){
+            //create a new grouping
+            const dateGroup = document.createElement("div");
+            dateGroup.className = "text-center";
+
+            dateGroup.innerHTML = `
+              <p class="text-muted mb-2 mt-1">${today}</p>
+            `;
+
+            cardRow.appendChild(dateGroup);
+
+            lastDay = today;
+          }
+          //else do nothing
+
           const card = document.createElement("div");
           const taskIsDue = task.due_time < getCurrentLocalTime();
           card.className = "mx-auto my-3 ";
@@ -200,7 +221,7 @@ async function getTasks() {
               <div class="card-body">
                   <h5 class="card-title">${task.title}</h5>
                   <p class="card-text">${task.description}</p>
-                  <p class="card-text my-0"><small id="due-time">Due: ${task.due_time}</small></p>
+                  <p class="card-text my-0"><small id="due-time">${taskIsDue ? '<strong>TASK IS DUE: </strong>' : 'DUE TIME'} ${task.due_time}</small></p>
                   <button type="button" class="btn btn-link btn-sm position-absolute top-0 end-0 py-2 px-3" onclick="event.stopPropagation(); showDeleteConfirmationWithID(${task.id})">
                       <i class="fas fa-trash" style="color: rgb(255, 21, 95)"></i>
                   </button>

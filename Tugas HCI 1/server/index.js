@@ -22,9 +22,9 @@ app.use(require('body-parser').json());
 const STATUS_INCOMPLETE = 0;
 const STATUS_DONE = 1;
 
-const publicVapidKey = process.env.PUBLIC_VAPID_KEY
-const privateVapidKey = process.env.PRIVATE_VAPID_KEY
-webpush.setVapidDetails('mailto: yuanataalex@gmail.com', publicVapidKey, privateVapidKey);
+// const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+// const privateVapidKey = process.env.PRIVATE_VAPID_KEY
+// webpush.setVapidDetails('mailto: yuanataalex@gmail.com', publicVapidKey, privateVapidKey);
 
 //Routes
 //Authentication
@@ -305,7 +305,7 @@ app.use('/static', express.static('../'))
 app.use(express.static('../scripts'))
 
 //start app
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`server up on port ${PORT}`);
 });
