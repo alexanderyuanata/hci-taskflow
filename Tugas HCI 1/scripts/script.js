@@ -192,6 +192,8 @@ async function getTasks() {
       } else {
         let lastDay = undefined;
         let today = undefined;
+        const currentDay = new Date().toISOString().split('T')[0];
+        console.log('current day is ' + currentDay);
 
         tasksToDisplay.forEach((task) => {
           today = task.due_time.substring(0,10);
@@ -200,10 +202,10 @@ async function getTasks() {
           if (lastDay != today){
             //create a new grouping
             const dateGroup = document.createElement("div");
-            dateGroup.className = "text-center";
+            dateGroup.className = "";
 
             dateGroup.innerHTML = `
-              <p class="text-muted mb-2 mt-1">${today}</p>
+              <p class="text-muted mb-2 mt-4 ps-2"><u>${today == currentDay ? "<b>TODAY</b>" : today}</u></p>
             `;
 
             cardRow.appendChild(dateGroup);
@@ -214,7 +216,7 @@ async function getTasks() {
 
           const card = document.createElement("div");
           const taskIsDue = task.due_time < getCurrentLocalTime();
-          card.className = "mx-auto my-3 ";
+          card.className = "mx-auto my-2 ";
 
           card.innerHTML = `
           <div class="card mb-2 taskCard ${taskIsDue ? 'due-task' : ''}" onclick="location.href='./task.html?id=${task.id}'">

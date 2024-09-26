@@ -9,11 +9,13 @@
   scale: 1.005 1.01;
   cursor: pointer;
   color: black;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.066);
 }
 
 .taskCard {
   transition: 0.25s ease-in-out;
   scale: 1.0;
+  box-shadow: 0px rgba(0, 0, 0, 0);
 }
 
 a {
@@ -72,4 +74,8 @@ a {
   padding-top: 2%;
   font-size: 20px;
   color: rgba(0, 0, 0, 0.493);
+}
+
+.bg-primary {
+  background-color: black;
 }
