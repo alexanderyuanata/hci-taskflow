@@ -14,17 +14,40 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-light" style="background-color: rgb(240, 242, 255);">
+    <nav class="navbar navbar-dark fixed-top bg-dark" id="navbar-color">
       <div class="container-fluid">
-        <div class="d-flex justify-content-start">
-          <a href="home.html">
-            <h4><strong>Task<span style="color:rgb(42, 207, 219)">Flow</span></strong></h4>
+        <div class="d-flex justify-content-start align-items-center">
+          <a href="home.html" class="navbar-brand d-flex align-items-center">
+            <h4 class="mb-0 text-light">
+              <strong
+                >Task<span style="color: rgb(42, 207, 219)">Flow</span></strong
+              >
+            </h4>
           </a>
+          <!-- Links here -->
+          <ul class="navbar-nav flex-row ms-3">
+            <li class="nav-item">
+              <a class="nav-link px-3 active" href="./home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-2" href="./mindmap.html">Mindmap</a>
+            </li>
+            <!-- future links -->
+          </ul>
         </div>
-        <div class="ms-auto">
-          <button class="btn btn-outline-danger" onclick="logout()">
-            Log Out
-          </button>
+        <div class="ms-auto me-3">
+          <a
+            href="javascript:void(0);"
+            onclick="logout()"
+            class="nav-link text-light"
+          >
+            <i class="fas fa-sign-out-alt" id="logout-icon"  
+            data-bs-toggle="tooltip" 
+            data-bs-placement="bottom"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Log out of your account."
+            ></i>
+          </a>
         </div>
       </div>
     </nav>
@@ -34,7 +57,7 @@
       class="container-fluid d-flex justify-content-center"
       id="task-container"
     >
-      <div class="card" id="task-card">
+      <div class="card mt-5" id="task-card">
         <div class="card-header d-flex justify-content-between">
           <h5 class="card-title" id="task-title"></h5>
           <div>
@@ -129,8 +152,9 @@
      </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="./scripts/script.js"></script>
+    <!-- Bootstrap JS and dependencies -->    
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>

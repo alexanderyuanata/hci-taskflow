@@ -27,10 +27,10 @@
           <!-- Links here -->
           <ul class="navbar-nav flex-row ms-3">
             <li class="nav-item">
-              <a class="nav-link px-3 active" href="./home.html">Home</a>
+              <a class="nav-link px-3" href="./home.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link px-2" href="./mindmap.html">Mindmap</a>
+              <a class="nav-link px-2 active" href="./mindmap.html">Mindmap</a>
             </li>
             <!-- future links -->
           </ul>
@@ -53,25 +53,10 @@
     </nav>
 
     <!-- Main List -->
-    <div class="container-fluid align-items-center">
-      <br />
-      <div class="row mt-4 mb-5" id="cardRow"></div>
+    <div class="container-fluid align-items-center mt-5 pt-5">
+        <!-- <svg class=" px-3 py-5 mt-5 w-100" id="task-mindmap-graph">  
+        </svg> -->
     </div>
-
-    <a href="./newTask.html">
-      <div
-        class="floating-button position-fixed bottom-0 end-0"
-        style="margin: 25px"
-      >
-        <button
-          type="button"
-          class="btn btn-primary btn-circle"
-          id="new-task-btn"
-        >
-          <i class="fas fa-pencil-alt"><br /><br />Add Task</i>
-        </button>
-      </div>
-    </a>
 
     <!-- Modal -->
     <div
@@ -108,48 +93,13 @@
       </div>
     </div>
 
-    <!-- Delete Task -->
-    <div
-      class="modal fade"
-      id="confirmDelete"
-      tabindex="-1"
-      aria-labelledby="messageModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="messageModalLabel">Task Deletion</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body" id="modalMessage">
-            You are about to delete a task. This is
-            <strong>permanent and cannot be undone.</strong><br />Press
-            <b>Confirm</b> to continue.
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-              id="home-task-delete-btn"
-            >
-              Confirm
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Bootstrap JS and dependencies -->    
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/mindmap.js" type="module"></script>
+    <script src="./scripts/utility.js" type="module"></script>
 
   </body>
 </html>

@@ -1,3 +1,11 @@
+//handle tooltips
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
+
 async function handleSignUp(event) {
   event.preventDefault();
 
@@ -9,13 +17,17 @@ async function handleSignUp(event) {
     return;
   }
 
-  if (username.includes(' ')) {
-    showMessageModal("All usernames cannot include spaces, please remove all spaces and try again.");
+  if (username.includes(" ")) {
+    showMessageModal(
+      "All usernames cannot include spaces, please remove all spaces and try again."
+    );
     return;
   }
 
   if (password.length < 3) {
-    showMessageModal("Passwords should be at least 3 characters long, please try again.");
+    showMessageModal(
+      "Passwords should be at least 3 characters long, please try again."
+    );
     return;
   }
 
@@ -192,8 +204,8 @@ async function getTasks() {
       } else {
         let lastDay = undefined;
         let today = undefined;
-        const currentDay = new Date().toISOString().split('T')[0];
-        console.log('current day is ' + currentDay);
+        const currentDay = new Date().toISOString().split("T")[0];
+        console.log("current day is " + currentDay);
 
         tasksToDisplay.forEach((task) => {
           today = task.due_time.substring(0, 10);
@@ -205,7 +217,9 @@ async function getTasks() {
             dateGroup.className = "";
 
             dateGroup.innerHTML = `
-              <p class="text-muted mb-2 mt-4 ps-2"><u>${today == currentDay ? "<b>TODAY</b>" : today}</u></p>
+              <p class="text-muted mb-2 mt-4 ps-2"><u>${
+                today == currentDay ? "<b>TODAY</b>" : today
+              }</u></p>
             `;
 
             cardRow.appendChild(dateGroup);
@@ -250,7 +264,7 @@ async function getTask() {
       return response.json(); // Parse the JSON from the response
     })
     .then((data) => {
-      taskDetail = data.task;
+      let taskDetail = data.task;
       console.log(taskDetail);
 
       const taskTitle = document.getElementById("task-title");
@@ -294,17 +308,20 @@ async function addTask() {
 
   if (!taskTags) {
     taskTags = "";
-  }
-  else {
+  } else {
     console.log("tag exists");
     if (!isValidTagFormat(taskTags)) {
-      showMessageModal("The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!");
+      showMessageModal(
+        "The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!"
+      );
       return;
     }
 
     let tags = extractTags(taskTags);
     if (tags.length > 3) {
-      showMessageModal("A task can only have a maximum of 3 tags, please try again!");
+      showMessageModal(
+        "A task can only have a maximum of 3 tags, please try again!"
+      );
       return;
     }
   }
@@ -378,17 +395,20 @@ async function updateTask() {
 
   if (taskTags == undefined) {
     taskTags = "";
-  }
-  else {
+  } else {
     console.log("tag exists");
     if (!isValidTagFormat(taskTags)) {
-      showMessageModal("The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!");
+      showMessageModal(
+        "The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!"
+      );
       return;
     }
 
     let tags = extractTags(taskTags);
     if (tags.length > 3) {
-      showMessageModal("A task can only have a maximum of 3 tags, please try again!");
+      showMessageModal(
+        "A task can only have a maximum of 3 tags, please try again!"
+      );
       return;
     }
   }
@@ -453,7 +473,7 @@ async function getTaskToUpdate() {
       return response.json(); // Parse the JSON from the response
     })
     .then((data) => {
-      taskDetail = data.task;
+      let taskDetail = data.task;
       console.log(taskDetail);
 
       const taskTitle = document.getElementById("update-title");
@@ -574,17 +594,34 @@ function showDeleteConfirmation() {
   modal.show();
 }
 
+
 function showDeleteConfirmationWithID(id) {
   const modalElement = document.getElementById("confirmDelete");
   const modal = new bootstrap.Modal(modalElement);
 
-  console.log('showing modal to delete task with id ' + id);
-  document.querySelector('#home-task-delete-btn').addEventListener('click', function () {
+  const deleteBtn = document.querySelector("#home-task-delete-btn");
+  const deleteHandler = function () {
+    console.log("deleting task " + id);
     deleteTaskWithID(id);
-  }, { once: true });
+  };
+
+  console.log("showing modal to delete task with id " + id);
+
+  // Remove any existing event listener to prevent duplicates
+  deleteBtn.removeEventListener("click", deleteHandler);
+
+  // Add the delete handler as a one-time listener
+  deleteBtn.addEventListener("click", deleteHandler, { once: true });
+
+  // Remove the delete handler when the modal is hidden
+  modalElement.addEventListener('hidden.bs.modal', function () {
+    console.log('removing deleteHandler...');
+    deleteBtn.removeEventListener("click", deleteHandler);
+  });
 
   modal.show();
 }
+
 
 // Checks for whenever the application loads
 function onDocumentLoad() {
@@ -672,11 +709,11 @@ setInterval(checkDueTasks, 60000); // send every minute
 function getCurrentLocalTime() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
@@ -694,7 +731,7 @@ function extractTags(str) {
   }
 
   // Split the string by commas and trim whitespace from each tag
-  return str.split(',').map(tag => tag.trim());
+  return str.split(",").map((tag) => tag.trim());
 }
 
 function createTaskCard(task) {
@@ -703,7 +740,9 @@ function createTaskCard(task) {
   card.className = "mx-auto my-2 ";
 
   card.innerHTML = `
-    <div class="card mb-2 taskCard ${taskIsDue ? 'due-task' : ''}" onclick="location.href='./task.html?id=${task.id}'">
+    <div class="card mb-2 taskCard ${
+    taskIsDue ? "due-task" : ""
+    }" onclick="location.href='./task.html?id=${task.id}'">
         <div class="card-body">
             <h5 class="card-title">${task.title}</h5>
             <p class="card-text">${task.description}</p>
@@ -712,19 +751,33 @@ function createTaskCard(task) {
  
                 <div>
                     <small>
-                        <span class="badge rounded-pill text-bg-light task-tags mx-0 px-0">${extractTags(task.tags).map(tag => `<span class="badge rounded-pill bg-secondary me-2">${tag}</span>`).join('')}</span>
+                        <span class="badge rounded-pill text-bg-light task-tags mx-0 px-0">${extractTags(
+      task.tags
+    )
+      .map(
+        (tag) =>
+          `<span class="badge rounded-pill bg-secondary me-2">${tag}</span>`
+      )
+      .join("")}</span>
                     </small>
                 </div>
                         <div>
             <p class="card-text my-0" id="due-time" style="font-size: 0.9rem;">
-                ${taskIsDue ? '<strong>TASK IS DUE: </strong>' : 'DUE TIME'} ${task.due_time}
+            <bold>
+                DUE TIME: ${task.due_time}
+            </bold>
             </p>
         </div>
 
         </div>
-                    <button type="button" class="btn btn-link btn-sm position-absolute top-0 end-0 py-2 px-3" onclick="event.stopPropagation(); showDeleteConfirmationWithID(${task.id})">
-                <i class="fas fa-trash" style="color: rgb(255, 21, 95)"></i>
-            </button>
+          <button type="button" 
+          class="btn btn-link btn-sm position-absolute top-0 end-0 py-2 px-3" 
+          onclick="event.stopPropagation(); showDeleteConfirmationWithID(${task.id
+          })">
+                <i class="fas fa-trash" style="color: rgb(255, 21, 95)"
+                >
+                </i>
+          </button>
     </div>
   `;
 

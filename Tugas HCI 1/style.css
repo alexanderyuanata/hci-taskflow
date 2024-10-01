@@ -83,3 +83,38 @@ a {
 .task-tags {
   font-size: 1rem;
 }
+
+#navbar-color {
+  color: white;
+}
+
+#logout-icon:hover{
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  transition: 0.2s ease-in-out;
+}
+
+#logout-icon{
+  color:rgba(240, 248, 255, 0.605);
+  transition: 0.2s ease-in-out;
+}
+
+#task-mindmap-graph {
+  background-color: rgb(255, 255, 255);
+  min-height: 80vh;
+}
+
+.node {
+  fill: #69b3a2;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+text {
+  fill: black;
+}
