@@ -9,12 +9,12 @@ async function handleSignUp(event) {
     return;
   }
 
-  if (username.includes(' ')){
+  if (username.includes(' ')) {
     showMessageModal("All usernames cannot include spaces, please remove all spaces and try again.");
     return;
   }
 
-  if (password.length < 3){
+  if (password.length < 3) {
     showMessageModal("Passwords should be at least 3 characters long, please try again.");
     return;
   }
@@ -196,10 +196,10 @@ async function getTasks() {
         console.log('current day is ' + currentDay);
 
         tasksToDisplay.forEach((task) => {
-          today = task.due_time.substring(0,10);
-          
+          today = task.due_time.substring(0, 10);
+
           //if the current date is different
-          if (lastDay != today){
+          if (lastDay != today) {
             //create a new grouping
             const dateGroup = document.createElement("div");
             dateGroup.className = "";
@@ -214,22 +214,8 @@ async function getTasks() {
           }
           //else do nothing
 
-          const card = document.createElement("div");
-          const taskIsDue = task.due_time < getCurrentLocalTime();
-          card.className = "mx-auto my-2 ";
-
-          card.innerHTML = `
-          <div class="card mb-2 taskCard ${taskIsDue ? 'due-task' : ''}" onclick="location.href='./task.html?id=${task.id}'">
-              <div class="card-body">
-                  <h5 class="card-title">${task.title}</h5>
-                  <p class="card-text">${task.description}</p>
-                  <p class="card-text my-0"><small id="due-time">${taskIsDue ? '<strong>TASK IS DUE: </strong>' : 'DUE TIME'} ${task.due_time}</small></p>
-                  <button type="button" class="btn btn-link btn-sm position-absolute top-0 end-0 py-2 px-3" onclick="event.stopPropagation(); showDeleteConfirmationWithID(${task.id})">
-                      <i class="fas fa-trash" style="color: rgb(255, 21, 95)"></i>
-                  </button>
-              </div>
-          </div>
-        `;
+          console.log(task);
+          const card = createTaskCard(task);
 
           cardRow.appendChild(card); // Append the card to the row
         });
@@ -309,6 +295,19 @@ async function addTask() {
   if (!taskTags) {
     taskTags = "";
   }
+  else {
+    console.log("tag exists");
+    if (!isValidTagFormat(taskTags)) {
+      showMessageModal("The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!");
+      return;
+    }
+
+    let tags = extractTags(taskTags);
+    if (tags.length > 3) {
+      showMessageModal("A task can only have a maximum of 3 tags, please try again!");
+      return;
+    }
+  }
 
   const now = new Date();
   const utcOffset = now.getTimezoneOffset() * 60000;
@@ -379,6 +378,19 @@ async function updateTask() {
 
   if (taskTags == undefined) {
     taskTags = "";
+  }
+  else {
+    console.log("tag exists");
+    if (!isValidTagFormat(taskTags)) {
+      showMessageModal("The tags inputted are incorrectly formatted. Tags are composed of numbers, letters, and underscore with commas separating tags. Please try again!");
+      return;
+    }
+
+    let tags = extractTags(taskTags);
+    if (tags.length > 3) {
+      showMessageModal("A task can only have a maximum of 3 tags, please try again!");
+      return;
+    }
   }
 
   const myHeaders = new Headers();
@@ -567,7 +579,7 @@ function showDeleteConfirmationWithID(id) {
   const modal = new bootstrap.Modal(modalElement);
 
   console.log('showing modal to delete task with id ' + id);
-  document.querySelector('#home-task-delete-btn').addEventListener('click', function() {
+  document.querySelector('#home-task-delete-btn').addEventListener('click', function () {
     deleteTaskWithID(id);
   }, { once: true });
 
@@ -669,48 +681,52 @@ function getCurrentLocalTime() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-// const publicVapidKey = 'BJ4hO-JT-vCAjwDWVB0uZK65nSFJ6RAEwpkKvg8DsJ8S0ZybijDCQyWgRVOP2VJIY6s973gsG5SrpqQv-ATidHo';
+function isValidTagFormat(str) {
+  // Regular expression to match the desired format
+  const regex = /^[a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*$/;
+  return regex.test(str);
+}
 
-// if ('serviceWorker' in navigator) {
-//   run().catch(error => console.error(error));
-// }
+function extractTags(str) {
+  // Check if the input string is valid based on the format
+  if (!isValidTagFormat(str)) {
+    return []; // Return an empty array if the format is invalid
+  }
 
-// async function run() {
-//   console.log('registering service worker');
-//   const registration = await navigator.serviceWorker.
-//     register('/worker.js', {scope: '/'});
-//   console.log('registered service worker');
+  // Split the string by commas and trim whitespace from each tag
+  return str.split(',').map(tag => tag.trim());
+}
 
-//   console.log('registering push notification');
-//   const subscription = await registration.pushManager.
-//     subscribe({
-//       userVisibleOnly: true,
-//       applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-//     });
-//   console.log('registered push notification');
+function createTaskCard(task) {
+  const card = document.createElement("div");
+  const taskIsDue = task.due_time < getCurrentLocalTime();
+  card.className = "mx-auto my-2 ";
 
-//   console.log('sending push');
-//   await fetch('/subscribe', {
-//     method: 'POST',
-//     body: JSON.stringify(subscription),
-//     headers: {
-//       'content-type': 'application/json'
-//     }
-//   });
-//   console.log('sent push');
-// }
+  card.innerHTML = `
+    <div class="card mb-2 taskCard ${taskIsDue ? 'due-task' : ''}" onclick="location.href='./task.html?id=${task.id}'">
+        <div class="card-body">
+            <h5 class="card-title">${task.title}</h5>
+            <p class="card-text">${task.description}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+ 
+                <div>
+                    <small>
+                        <span class="badge rounded-pill text-bg-light task-tags mx-0 px-0">${extractTags(task.tags).map(tag => `<span class="badge rounded-pill bg-secondary me-2">${tag}</span>`).join('')}</span>
+                    </small>
+                </div>
+                        <div>
+            <p class="card-text my-0" id="due-time" style="font-size: 0.9rem;">
+                ${taskIsDue ? '<strong>TASK IS DUE: </strong>' : 'DUE TIME'} ${task.due_time}
+            </p>
+        </div>
 
-// function urlBase64ToUint8Array(base64String) {
-//   const padding = '='.repeat((4 - base64String.length % 4) % 4);
-//   const base64 = (base64String + padding)
-//     .replace(/-/g, '+')
-//     .replace(/_/g, '/');
+        </div>
+                    <button type="button" class="btn btn-link btn-sm position-absolute top-0 end-0 py-2 px-3" onclick="event.stopPropagation(); showDeleteConfirmationWithID(${task.id})">
+                <i class="fas fa-trash" style="color: rgb(255, 21, 95)"></i>
+            </button>
+    </div>
+  `;
 
-//   const rawData = window.atob(base64);
-//   const outputArray = new Uint8Array(rawData.length);
-
-//   for (let i = 0; i < rawData.length; ++i) {
-//     outputArray[i] = rawData.charCodeAt(i);
-//   }
-//   return outputArray;
-// }
+  return card;
+}
