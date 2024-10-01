@@ -79,3 +79,7 @@ a {
 .bg-primary {
   background-color: black;
 }
+
+.task-tags {
+  font-size: 1rem;
+}
